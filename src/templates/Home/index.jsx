@@ -1,5 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '../../components/Button';
+import { Heading } from '../../components/Heading';
+import { useCounterContext } from '../../contexts/CounterContext';
 export const Home = () => {
-  return <p>hi tehre </p>;
+  const [state, actions] = useCounterContext();
+  const [actionsState] = useState(actions);
+  const handleError = () => {
+    actions
+      .asyncError()
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e.name, ':', e.message));
+  };
+  return (
+    <div>
+      <Heading />
+      <div>
+        <Button onButtonClick={() => actions.increase()}>Increase</Button>
+        <Button onButtonClick={() => actions.decrease()}>Decrease</Button>
+        <Button onButtonClick={() => actions.reset()}>Reset</Button>
+        <Button onButtonClick={() => actions.setCounter({ counter: 10 })}>
+          SetCounter
+        </Button>
+        <Button onButtonClick={() => actions.setCounter({ counter: 1 })}>
+          SetCounter
+        </Button>
+        <Button
+          disabled={state.loading}
+          onButtonClick={() => actions.asyncIncrease()}
+        >
+          Async Increase
+        </Button>
+        <Button disabled={state.loading} onButtonClick={handleError}>
+          Async Error
+        </Button>
+      </div>
+    </div>
+  );
 };
 export default Home;

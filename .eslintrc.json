@@ -22,13 +22,13 @@
     "react"
   ],
   "rules": {
-    "no-unused-vars": [
+    "no-unused-vars": "off" /*[]
       "error",
       {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_"
       }
-    ]
+    ] */
   },
   "settings": {
     "react": {
